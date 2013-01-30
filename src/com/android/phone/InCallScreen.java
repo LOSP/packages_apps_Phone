@@ -35,7 +35,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.os.AsyncResult;
 import android.os.Bundle;
@@ -45,6 +50,7 @@ import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.SystemClock;
 import android.os.SystemProperties;
+import android.preference.PreferenceManager;
 import android.telephony.ServiceState;
 import android.text.TextUtils;
 import android.text.method.DialerKeyListener;
@@ -170,6 +176,80 @@ public class InCallScreen extends Activity
     // know its undefined. In particular checkIsOtaCall will return
     // false.
     public static final String ACTION_UNDEFINED = "com.android.phone.InCallScreen.UNDEFINED";
+
+    //Default value for the flip action
+    private static final String DEFAULT_FLIP_ACTION = "0";
+
+    // Flip action ID-s
+    private static final int RINGING_NO_ACTION = 0;
+    private static final int MUTE_RINGER = 1;
+    private static final int DISMISS_CALL = 2;
+
+    private int mFlipAction;
+
+    private final SensorEventListener mFlipListener = new SensorEventListener() {
+        private static final int FACE_UP_LOWER_LIMIT = -45;
+        private static final int FACE_UP_UPPER_LIMIT = 45;
+        private static final int FACE_DOWN_UPPER_LIMIT = 135;
+        private static final int FACE_DOWN_LOWER_LIMIT = -135;
+        private static final int TILT_UPPER_LIMIT = 45;
+        private static final int TILT_LOWER_LIMIT = -45;
+        private static final int SENSOR_SAMPLES = 3;
+
+        private boolean mWasFaceUp;
+        private boolean[] mSamples = new boolean[SENSOR_SAMPLES];
+        private int mSampleIndex;
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int acc) {
+        }
+
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            // Add a sample overwriting the oldest one. Several samples
+            // are used
+            // to avoid the erroneous values the sensor sometimes
+            // returns.
+            float y = event.values[1];
+            float z = event.values[2];
+
+            if (!mWasFaceUp) {
+                // Check if its face up enough.
+                mSamples[mSampleIndex] = y > FACE_UP_LOWER_LIMIT
+                        && y < FACE_UP_UPPER_LIMIT
+                        && z > TILT_LOWER_LIMIT && z < TILT_UPPER_LIMIT;
+
+                // The device first needs to be face up.
+                boolean faceUp = true;
+                for (boolean sample : mSamples) {
+                    faceUp = faceUp && sample;
+                }
+                if (faceUp) {
+                    mWasFaceUp = true;
+                    for (int i = 0; i < SENSOR_SAMPLES; i++) {
+                        mSamples[i] = false;
+                    }
+                }
+            } else {
+                // Check if its face down enough. Note that wanted
+                // values go from FACE_DOWN_UPPER_LIMIT to 180
+                // and from -180 to FACE_DOWN_LOWER_LIMIT
+                mSamples[mSampleIndex] = (y > FACE_DOWN_UPPER_LIMIT || y < FACE_DOWN_LOWER_LIMIT)
+                        && z > TILT_LOWER_LIMIT
+                        && z < TILT_UPPER_LIMIT;
+
+                boolean faceDown = true;
+                for (boolean sample : mSamples) {
+                    faceDown = faceDown && sample;
+                }
+                if (faceDown) {
+                    handleAction(mFlipAction);
+                }
+            }
+
+            mSampleIndex = ((mSampleIndex + 1) % SENSOR_SAMPLES);
+        }
+    };
 
     /** Status codes returned from syncWithPhoneState(). */
     private enum SyncWithPhoneStateStatus {
@@ -556,6 +636,11 @@ public class InCallScreen extends Activity
         if (DBG) log("onResume()...");
         super.onResume();
 
+        final SharedPreferences prefs = PreferenceManager.
+                getDefaultSharedPreferences(this);
+        mFlipAction = Integer.parseInt(prefs.getString(
+                CallFeaturesSetting.FLIP_ACTION_KEY, DEFAULT_FLIP_ACTION));
+
         mIsForegroundActivity = true;
         mIsForegroundActivityForProximity = true;
 
@@ -779,6 +864,7 @@ public class InCallScreen extends Activity
     protected void onPause() {
         if (DBG) log("onPause()...");
         super.onPause();
+        detachListeners();
 
         if (mPowerManager.isScreenOn()) {
             // Set to false when the screen went background *not* by screen turned off. Probably
@@ -958,6 +1044,43 @@ public class InCallScreen extends Activity
         // references to our internal widgets.
         if (mApp.otaUtils != null) {
             mApp.otaUtils.clearUiWidgets();
+        }
+    }
+
+    private void attachListeners() {
+        final SensorManager sm = getSensorManager();
+
+        if(mFlipAction != RINGING_NO_ACTION) {
+            sm.registerListener(mFlipListener,
+                sm.getDefaultSensor(Sensor.TYPE_ORIENTATION),
+                SensorManager.SENSOR_DELAY_NORMAL);
+        }
+    }
+
+    private SensorManager getSensorManager() {
+        return (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+    }
+
+    private void detachListeners() {
+        final SensorManager sm = getSensorManager();
+
+        if(mFlipAction != RINGING_NO_ACTION) {
+            sm.unregisterListener(mFlipListener);
+        }
+    }
+
+    private void handleAction(int action) {
+        switch(action) {
+            case MUTE_RINGER:
+                internalSilenceRinger();
+                break;
+            case DISMISS_CALL:
+                internalHangup();
+                break;
+            case RINGING_NO_ACTION:
+            default:
+                //no action
+                break;
         }
     }
 
@@ -2381,6 +2504,8 @@ public class InCallScreen extends Activity
         // closed.  (We do this to make sure we're not covering up the
         // "incoming call" UI.)
         if (mCM.getState() == PhoneConstants.State.RINGING) {
+            //If we're ringing, attach flip listener
+            attachListeners();
             if (mDialer.isOpened()) {
               Log.i(LOG_TAG, "During RINGING state we force hiding dialpad.");
               closeDialpadInternal(false);  // don't do the "closing" animation
@@ -3476,6 +3601,7 @@ public class InCallScreen extends Activity
         final boolean hasRingingCall = mCM.hasActiveRingingCall();
 
         if (hasRingingCall) {
+            detachListeners();
             Phone phone = mCM.getRingingPhone();
             Call ringing = mCM.getFirstActiveRingingCall();
             int phoneType = phone.getPhoneType();
@@ -3567,6 +3693,7 @@ public class InCallScreen extends Activity
         // In the rare case when multiple calls are ringing, the UI policy
         // it to always act on the first ringing call.
         PhoneUtils.hangupRingingCall(mCM.getFirstActiveRingingCall());
+        detachListeners();
     }
 
     /**
@@ -3579,6 +3706,7 @@ public class InCallScreen extends Activity
             // ringer is actually playing, so silence it.
             notifier.silenceRinger();
         }
+        detachListeners();
     }
 
     /**
