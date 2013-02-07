@@ -188,7 +188,6 @@ public class CallFeaturesSetting extends PreferenceActivity
     private static final String SIP_SETTINGS_CATEGORY_KEY =
             "sip_settings_category_key";
 
-    // Key for flip actions
     public static final String FLIP_ACTION_KEY = "flip_action";
 
     private Intent mContactListIntent;
@@ -273,7 +272,6 @@ public class CallFeaturesSetting extends PreferenceActivity
     private ListPreference mVoicemailNotificationVibrateWhen;
     private SipSharedPreferences mSipSharedPreferences;
 
-    //Preference for flip action
     private ListPreference mFlipAction;
 
     private class VoiceMailProvider {
@@ -616,7 +614,7 @@ public class CallFeaturesSetting extends PreferenceActivity
 
     private void updateFlipActionSummary(String action) {
         int i = Integer.parseInt(action);
-        if(mFlipAction != null) {
+        if (mFlipAction != null) {
             String[] summaries = getResources().getStringArray(R.array.flip_action_summary_entries);
             mFlipAction.setSummary(getString(R.string.flip_action_summary, summaries[i]));
         }
@@ -1627,7 +1625,7 @@ public class CallFeaturesSetting extends PreferenceActivity
             }
         }
 
-        if(mFlipAction != null) {
+        if (mFlipAction != null) {
             mFlipAction.setOnPreferenceChangeListener(this);
         }
 

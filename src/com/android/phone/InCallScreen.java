@@ -35,7 +35,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -50,7 +49,6 @@ import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.SystemClock;
 import android.os.SystemProperties;
-import android.preference.PreferenceManager;
 import android.telephony.ServiceState;
 import android.text.TextUtils;
 import android.text.method.DialerKeyListener;
@@ -177,10 +175,7 @@ public class InCallScreen extends Activity
     // false.
     public static final String ACTION_UNDEFINED = "com.android.phone.InCallScreen.UNDEFINED";
 
-    //Default value for the flip action
-    private static final String DEFAULT_FLIP_ACTION = "0";
-
-    // Flip action ID-s
+    // Flip action IDs
     private static final int RINGING_NO_ACTION = 0;
     private static final int MUTE_RINGER = 1;
     private static final int DISMISS_CALL = 2;
@@ -207,8 +202,7 @@ public class InCallScreen extends Activity
         @Override
         public void onSensorChanged(SensorEvent event) {
             // Add a sample overwriting the oldest one. Several samples
-            // are used
-            // to avoid the erroneous values the sensor sometimes
+            // are used to avoid the erroneous values the sensor sometimes
             // returns.
             float y = event.values[1];
             float z = event.values[2];
@@ -244,6 +238,7 @@ public class InCallScreen extends Activity
                 }
                 if (faceDown) {
                     handleAction(mFlipAction);
+                    mWasFaceUp = false;
                 }
             }
 
@@ -636,10 +631,7 @@ public class InCallScreen extends Activity
         if (DBG) log("onResume()...");
         super.onResume();
 
-        final SharedPreferences prefs = PreferenceManager.
-                getDefaultSharedPreferences(this);
-        mFlipAction = Integer.parseInt(prefs.getString(
-                CallFeaturesSetting.FLIP_ACTION_KEY, DEFAULT_FLIP_ACTION));
+        mFlipAction = PhoneUtils.PhoneSettings.flipAction(this);
 
         mIsForegroundActivity = true;
         mIsForegroundActivityForProximity = true;
@@ -1050,7 +1042,7 @@ public class InCallScreen extends Activity
     private void attachListeners() {
         final SensorManager sm = getSensorManager();
 
-        if(mFlipAction != RINGING_NO_ACTION) {
+        if (mFlipAction != RINGING_NO_ACTION) {
             sm.registerListener(mFlipListener,
                 sm.getDefaultSensor(Sensor.TYPE_ORIENTATION),
                 SensorManager.SENSOR_DELAY_NORMAL);
@@ -1064,7 +1056,7 @@ public class InCallScreen extends Activity
     private void detachListeners() {
         final SensorManager sm = getSensorManager();
 
-        if(mFlipAction != RINGING_NO_ACTION) {
+        if (mFlipAction != RINGING_NO_ACTION) {
             sm.unregisterListener(mFlipListener);
         }
     }
@@ -1082,6 +1074,7 @@ public class InCallScreen extends Activity
                 //no action
                 break;
         }
+        detachListeners();
     }
 
     /**
@@ -3693,7 +3686,6 @@ public class InCallScreen extends Activity
         // In the rare case when multiple calls are ringing, the UI policy
         // it to always act on the first ringing call.
         PhoneUtils.hangupRingingCall(mCM.getFirstActiveRingingCall());
-        detachListeners();
     }
 
     /**
@@ -3706,7 +3698,6 @@ public class InCallScreen extends Activity
             // ringer is actually playing, so silence it.
             notifier.silenceRinger();
         }
-        detachListeners();
     }
 
     /**
