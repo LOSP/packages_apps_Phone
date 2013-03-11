@@ -642,6 +642,8 @@
     <string name="vibrate_hangup">Вибрировать при отбое</string>
     <string name="vibrate_45">Вибрировать каждые 45 сек</string>
     <string name="vibrate_45_sum">Вибрировать каждые 45 секунд в течение исходящего звонка</string>
+    <string name="rejected_as_missed">Отклоненные вызовы как пропущенные</string>
+    <string name="rejected_as_missed_sum">Помечать в журнале отклоненные вызовы как пропущенные</string>
     <string name="show_ssn_label">Уведомления о событиях</string>
     <string name="show_ssn_summary">Показывать уведомления различных событий, связанных с сетью обработки вызовов</string>
 

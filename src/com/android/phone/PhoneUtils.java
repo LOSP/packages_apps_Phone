@@ -420,6 +420,10 @@ public class PhoneUtils {
                       .getString("flip_action", "0");
             return Integer.parseInt(s);
         }
+        static boolean rejectedAsMissed(Context context) {
+            return PreferenceManager.getDefaultSharedPreferences(context)
+                      .getBoolean("button_rejected_as_missed", false);
+        }
     }
 
     static boolean hangupRingingCall(Call ringing) {

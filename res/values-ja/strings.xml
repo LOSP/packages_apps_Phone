@@ -624,4 +624,6 @@
     <string name="preference_category_ringtone" msgid="9007490591910078324">"着信音"</string>
     <string name="perm_change_mobile_network">ネットワークを変更(2G/3G)</string>
     <string name="perm_change_mobile_network_desc">この権限を許可されたアプリケーションは、いつでも2G/3Gデータの切り替えが可能です。3Gは高速ですが、バッテリ消費が増加します。また、キャリアの課金も増加することがあります。</string>
+    <string name="rejected_as_missed">拒否着信を不在着信にする</string>
+    <string name="rejected_as_missed_sum">通話履歴の拒否着信を \'着信\' ではなく \'不在着信\' にする</string>
 </resources>
