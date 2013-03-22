@@ -44,6 +44,8 @@
     <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"Экстренные вызовы запрещены настройками доступа."</string>
     <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"Обычные вызовы запрещены настройками доступа."</string>
     <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"Неверный номер"</string>
+    <!-- In-call screen: status label for an incoming call that is not answered and forwarded  -->
+    <string name="callUnanswered_forwarded">Неотвеченный вызов переадресован</string>
     <string name="confCall" msgid="1904840547188336828">"Конференц-вызов"</string>
     <string name="call_lost" msgid="317670617901479594">"Вызов был утрачен."</string>
     <string name="ok" msgid="3811371167865772377">"ОК"</string>
@@ -77,6 +79,10 @@
     <string name="apn_settings" msgid="9043423184895642077">"Точки доступа (APN)"</string>
     <string name="settings_label" msgid="3876743539816984008">"Настройки сети"</string>
     <string name="voicemail" msgid="8693759337917898954">"Голосовая почта"</string>
+    <!-- Call settings screen, message wait indicator name -->
+    <string name="mwi_notification_title">Индикатор непросмотренных сообщений</string>
+    <!-- Call settings screen, message wait indicator summary -->
+    <string name="mwi_notification_summary">Показывать индикатор непросмотренных сообщений голосовой почты</string>
     <string name="voicemail_abbreviated" msgid="2215592488517217448">"ГП:"</string>
     <string name="networks" msgid="8873030692174541976">"Операторы связи"</string>
     <string name="call_settings" msgid="6112441768261754562">"Вызовы"</string>
@@ -168,6 +174,10 @@
     <string name="preferred_network_mode_cdma_only_summary" msgid="1309770926198634150">"Предпочтительная сеть: только CDMA"</string>
     <string name="preferred_network_mode_evdo_only_summary" msgid="8472220691721269155">"Предпочтительная сеть: только EvDo"</string>
     <string name="preferred_network_mode_lte_cdma_summary" msgid="3722647806454528426">"Предпочтительная сеть: LTE или CDMA"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary">Предпочтительная сеть: LTE / CDMA / EvDo</string>
+    <string name="preferred_network_mode_lte_gsm_summary">Предпочтительная сеть: LTE / GSM/WCDMA</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_gsm_wcdma_summary">Предпочтительная сеть: LTE / CMDA / EvDo / GSM/WCDMA</string>
+    <string name="preferred_network_mode_lte_wcdma_summary">Предпочтительная сеть: LTE / WCDMA</string>
   <string-array name="preferred_network_mode_choices">
     <item msgid="5543794538185064048">"LTE/CDMA"</item>
     <item msgid="3273348576277144124">"Только EvDo"</item>
@@ -199,6 +209,7 @@
     <string name="throttle_status_subtext" msgid="1657318943142085170">"<xliff:g id="USED_0">%1$s</xliff:g> (<xliff:g id="USED_1">%2$d</xliff:g>٪) из <xliff:g id="USED_2">%3$s</xliff:g> (максимум)"\n"Следующий период начнется в течение <xliff:g id="USED_3">%4$d</xliff:g> дн. (<xliff:g id="USED_4">%5$s</xliff:g>)"</string>
     <string name="throttle_data_usage_subtext" msgid="6029276011123694701">"<xliff:g id="USED_0">%1$s</xliff:g> (<xliff:g id="USED_1">%2$d</xliff:g>٪) из <xliff:g id="USED_2">%3$s</xliff:g> (максимум)"</string>
     <string name="throttle_data_rate_reduced_subtext" msgid="7492763592720107737">"Превышен лимит в <xliff:g id="USED_0">%1$s</xliff:g>."\n"Скорость передачи данных снижена до <xliff:g id="USED_1">%2$d</xliff:g> кбит/с."</string>
+    <string name="throttle_time_frame_subtext"><xliff:g id="used">%1$d</xliff:g>\u066A цикла прошло\nСледующий раз через <xliff:g id="used">%2$d</xliff:g> дней (<xliff:g id="used">%3$s</xliff:g>)</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for throttle_time_frame_subtext (7732763021560399960) -->
     <skip />
@@ -392,11 +403,43 @@
     <string name="card_title_redialing" msgid="4831412164303596395">"Повторная попытка"</string>
     <string name="card_title_conf_call" msgid="1162980346189744501">"Конференц-вызов"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"Входящий вызов"</string>
+    <!-- In-call screen: status label for a call that is held remotely  -->
+    <string name="card_title_waiting_call">Ожидание вызова</string>
     <string name="card_title_call_ended" msgid="5544730338889702298">"Вызов завершен"</string>
     <string name="card_title_on_hold" msgid="821463117892339942">"Ждет ответа"</string>
     <string name="card_title_hanging_up" msgid="3999101620995182450">"Завершение разговора"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"Поступающий вызов"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"Мой номер: <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
+    <!-- Toast text for Unconditional Call Forwarding enabled  -->
+    <string name="call_notif_unconditionalCF">Активирована безусловная переадресация звонков</string>
+    <!-- Toast text for Conditional Call Forwarding enabled  -->
+    <string name="call_notif_conditionalCF">Активирована условная переадресация звонков</string>
+    <!-- Toast text for a forwarded MO call  -->
+    <string name="call_notif_MOcall_forwarding">Исходящий звонок переадресовывается</string>
+    <!-- In-call screen: status label when Call waiting is enabled on remote party  -->
+    <string name="call_notif_calliswaiting">Абонент занят, звонок ожидает</string>
+    <!-- Toast text for MO call, when the caller & callee both belng to a CUG group -->
+    <string name="call_notif_cugcall">Звонок в закрытую группу пользователей</string>
+    <!-- In-call screen: status label when MO calls are barred -->
+    <string name="call_notif_outgoing_barred">Исходищие звонки игнорируются</string>
+    <!-- Toast text for MO calls, when incoming calls are barred at remote party -->
+    <string name="call_notif_incoming_barred">Входящие звонки блокируются оператором</string>
+    <!-- Toast text for MO calls when CLIR Suppression is rejected -->
+    <string name="call_notif_clir_suppression_rejected">Подавление своего номера запрещено сетью</string>
+    <!-- In-call screen: status label when MO call gets deflected to another party -->
+    <string name="call_notif_call_deflected">Звонок переадресован оператором</string>
+    <!-- Toast text for incoming call being forwarded to other remote party  -->
+    <string name="call_notif_MTcall_forwarding">Входящий звонок переадресован</string>
+    <!-- Toast text for incoming call which is part of MultiParty Call -->
+    <string name="call_notif_multipartycall">Групповой вызов</string>
+    <!-- Toast text for incoming call which is answered,put on hold & then released -->
+    <string name="call_notif_callonhold_released">Звонок прекращен Вашим абонентом</string>
+    <!-- Toast text for incoming call forward check received -->
+    <string name="call_notif_forwardcheckreceived">Звонок передаресован</string>
+    <!-- Toast text for incoming call connecting through ECT -->
+    <string name="call_notif_callconnectingect">Звонок проходит через ЕСТ (explicit call transfer)</string>
+    <!-- Toast text for incoming call connected through ECT -->
+    <string name="call_notif_callconnectedect">Звонок подключен через ЕСТ (explicit call transfer)</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Набор номера"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Пропущенный вызов"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Пропущенные вызовы"</string>
@@ -428,6 +471,8 @@
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Невозможно отклонить вызов."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Не удается разъединить абонентов."</string>
     <string name="incall_call_type_label_sip" msgid="2310958283037924371">"Интернет-вызов"</string>
+    <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
+    <string name="incall_call_type_label_forwarded">Звонок переадресован</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Экстренный вызов"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Включение радио…"</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"Вне зоны действия сети, повторное подключение..."</string>
@@ -506,6 +551,9 @@
     <string name="voicemail_settings" msgid="72448049107749316">"Настройка"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Не задано&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"Другие настройки вызовов"</string>
+    <!-- Dialer UI Settings -->
+    <string name="dialer_ui_settings_title">Настройки номеронабирателя</string>
+    <string name="dialer_ui_settings_summary">Настройки кнопок для набора номера</string>
     <string name="calling_via_template" msgid="4839419581866928142">"Звонок через <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"фотография контакта"</string>
     <string name="goPrivate" msgid="865837794424530980">"приватная конференция"</string>
@@ -624,16 +672,15 @@
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Вибросигнал и рингтон"</string>
     <string name="dtmf_tone_enable_title" msgid="827601042915852989">"Звук клавиш"</string>
     <string name="preference_category_ringtone" msgid="9007490591910078324">"Рингтон"</string>
+    <!-- Permission for notification-bar network toggle -->
+    <string name="perm_change_mobile_network">Переключить сеть (2G/3G)</string>
+    <string name="perm_change_mobile_network_desc">Приложение, имеющее данное разрешение, может в любое время переключать режимы связи между 2G и 3G. Режим 3G имеет более высокую скорость и большее потребление энергии.</string>
 
     <!-- Noise suppression -->
     <string name="noise_suppression_title">Шумоподавление</string>
     <string name="noise_suppression_summary">Включить шумоподавление в телефонных разговорах</string>
 
     <!-- CYANOGENMOD ADDITIONS START -->
-
-    <!-- Dialer UI Settings -->
-    <string name="dialer_ui_settings_title">Настройки кнопок</string>
-    <string name="dialer_ui_settings_summary">Настройки номеронабирателя</string>
 
     <!-- Advanced Phone Settings -->
     <string name="advanced_setting">Дополнительные настройки</string>
@@ -646,12 +693,36 @@
     <string name="rejected_as_missed_sum">Помечать в журнале отклоненные вызовы как пропущенные</string>
     <string name="show_ssn_label">Уведомления о событиях</string>
     <string name="show_ssn_summary">Показывать уведомления различных событий, связанных с сетью обработки вызовов</string>
-
+    <string name="calllog_after_call">Список вызовов после завершения вызова</string>
+    <string name="calllog_after_call_summary">По окончанию вызова перейти к списку вызовов</string>
     <string name="national_roaming">Национальный роуминг</string>
     <string name="national_roaming_enable">Подключаться к службам передачи данных в национальном роуминге</string>
     <string name="national_roaming_disable">Не подключаться к службам передачи данных в национальном роуминге</string>
+    <!-- Setting title for the flip action setting. -->
+    <string name="flip_action_title">Переворот телефона</string>
 
-    <string name="perm_change_mobile_network">Изменение сети (2G/3G)</string>
-    <string name="perm_change_mobile_network_desc">Приложение, имеющее данное разрешение, может в любое время переключать режимы связи между 2G и 3G. Режим 3G имеет более высокую скорость и большее потребление энергии.</string>
-    <!-- CYANOGENMOD ADDITIONS END -->
+    <!-- Dialog title of the flip action setting. -->
+    <string name="flip_action_dialog_title">Выбор действия\u2026</string>
+
+    <!-- Setting summary for the flip action setting. -->
+    <string name="flip_action_summary">Перевернув телефон экраном вниз, <xliff:g id="action">%s</xliff:g></string>
+
+    <!-- Values for the flip action settings. -->
+    <string-array name="flip_action_setting_entries">
+        <item>Ничего не делать</item>
+        <item>Выключить звонок</item>
+        <item>Сбросить вызов</item>
+    </string-array>
+
+    <!-- Summary texts for flip action. Must be ordered by numerical
+         value (do nothing = 0, mute = 1, dismiss = 2) -->
+    <string-array name="flip_action_summary_entries">
+        <item>ничего не делать</item>
+        <item>выключить звонок</item>
+        <item>сбросить звонок</item>
+    </string-array>
+    <!-- My Phone Number field -->
+    <string name="phone_number_label">Мой номер телефона</string>
+    <string name="phone_number_summary">Задать номер телефона для данного устройства</string>
+
 </resources>
