@@ -1,21 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--  Copyright (C) 2007 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?>
 
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-
-          http://www.apache.org/licenses/LICENSE-2.0
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
- -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="phoneAppLabel" product="tablet">Telefon</string>
     <string name="phoneAppLabel" product="default">Telefon</string>
     <string name="emergencyDialerIconLabel">Numery alarmowe</string>
@@ -47,6 +32,7 @@
     <string name="callUnanswered_forwarded">Połączenie nieodebrane i przekazane</string>
     <string name="confCall">Poł. konferencyjne</string>
     <string name="call_lost">Połączenie zostało zerwane.</string>
+    <string name="ok">OK</string>
     <string name="mmiStarted">Kod MMI został rozpoczęty</string>
     <string name="ussdRunning">Uruchomiony kod USSD...</string>
     <string name="mmiCancelled">Kod MMI został anulowany</string>
@@ -55,6 +41,7 @@
     <string name="audio_mode_speaker">Głośnik</string>
     <string name="audio_mode_earpiece">Słuchawka telefonu</string>
     <string name="audio_mode_wired_headset">Przewodowy zestaw słuch.</string>
+    <string name="audio_mode_bluetooth">Bluetooth</string>
     <string name="wait_prompt_str">\"Wysłać następujące dzwonki?\"\n</string>
     <string name="pause_prompt_str">\"Wysyłanie sygnałów\"\n</string>
     <string name="send_button">Wyślij</string>
@@ -126,6 +113,7 @@
     <string name="exception_error">Błąd sieci lub karty SIM.</string>
     <string name="fdn_check_failure">W aplikacji Telefon włączone jest ustawienie Numery ustalone. W rezultacie niektóre funkcje związane z połączeniami nie działają.</string>
     <string name="radio_off_error">Przed wyświetleniem tych ustawień włącz radio.</string>
+    <string name="close_dialog">OK</string>
     <string name="enable">Włącz</string>
     <string name="disable">Wyłącz</string>
     <string name="change_num">Aktualizuj</string>
@@ -325,6 +313,7 @@
     <string name="pin_failed">Wpisany kod PIN był nieprawidłowy.</string>
     <string name="pin_changed">Kod PIN do karty SIM został zmieniony.</string>
     <string name="puk_requested">Błędne hasło, karta SIM jest zablokowana! Wymagany kod PUK2.</string>
+    <string name="enter_pin2_text">PIN2</string>
     <string name="oldPin2Label">Stary kod PIN2</string>
     <string name="newPin2Label">Nowy PIN2</string>
     <string name="confirmPin2Label">Potwierdź nowy kod PIN2</string>
@@ -345,6 +334,7 @@
     <string name="card_title_dialing_waiting">Wybieranie (czekam\u2026)</string>
     <string name="card_title_conf_call">Poł. konferencyjne</string>
     <string name="card_title_incoming_call">Połączenie</string>
+    <string name="card_title_waiting_call">Połączenie oczekujące</string>
     <string name="card_title_call_ended">Połączenie zakończone</string>
     <string name="card_title_on_hold">Oczekujące</string>
     <string name="card_title_hanging_up">Trwa rozłączanie</string>
@@ -439,6 +429,7 @@
     <string name="ota_call_end">Wstecz</string>
     <string name="ota_try_again">Spróbuj ponownie</string>
     <string name="ota_next">Dalej</string>
+    <string name="ecm_exit_dialog">EcmExitDialog</string>
     <string name="phone_entered_ecm_text">Włączono tryb alarmowego połączenia zwrotnego</string>
     <string name="phone_in_ecm_notification_title">Tryb alarmowego połączenia zwrotnego</string>
     <string name="phone_in_ecm_call_notification_text">Połączenie transmisji danych jest wyłączone</string>
@@ -485,6 +476,7 @@
     <string name="sip_menu_save">Zapisz</string>
     <string name="sip_menu_discard">Odrzuć</string>
     <string name="alert_dialog_close">Zamknij profil</string>
+    <string name="alert_dialog_ok">OK</string>
     <string name="close_profile">Zamknij</string>
     <string name="primary_account_summary_with">Konto podstawowe. <xliff:g id="REGISTRATION_STATUS">%s</xliff:g></string>
     <string name="registration_status_checking_status">Sprawdzanie stanu...</string>
@@ -536,6 +528,7 @@
     <string name="respond_via_sms_custom_message">Wiadomość niestandardowa</string>
     <string name="respond_via_sms_setting_title">Szybkie odpowiedzi</string>
     <string name="respond_via_sms_setting_title_2">Edytuj szybkie odpowiedzi</string>
+    <string name="respond_via_sms_setting_summary">[empty string]</string>
     <string name="respond_via_sms_edittext_dialog_title">Szybka odpowiedź</string>
     <string name="respond_via_sms_confirmation_format">Wiadomość wysłano na numer <xliff:g id="PHONE_NUMBER">%s</xliff:g>.</string>
     <string name="description_image_button_one">jeden</string>
@@ -548,6 +541,7 @@
     <string name="description_image_button_eight">osiem</string>
     <string name="description_image_button_nine">dziewięć</string>
     <string name="description_image_button_star">gwiazdka</string>
+    <string name="description_image_button_zero">zero</string>
     <string name="description_image_button_pound">znak funta</string>
     <string name="description_dial_button">wybierz numer</string>
     <string name="description_delete_button">cofnij</string>
@@ -574,9 +568,11 @@
     <string name="vibrate_45_sum">Wibruj na 45 sekundzie każdej minuty podczas połączeń wychodzących</string>
     <string name="rejected_as_missed">Odrzucone Połączenia jako nieodebrane</string>
     <string name="rejected_as_missed_sum">Oznacz odrzucone jako nieodebrane niż przychodzące w rejestrze połączeń</string>
+    <string name="show_ssn_label">Powiadomienie o zdarzeniu</string>
     <string name="show_ssn_summary">Pokaż powiadomienia różnych wydarzeń związanych z obsługą połączeń</string>
     <string name="calllog_after_call">Rejestr połączeń po rozmowie</string>
     <string name="calllog_after_call_summary">Pokaż rejestr połączeń po skończonej rozmowie</string>
+    <string name="noise_suppression_title">Tłumienie hałasu</string>
     <string name="noise_suppression_summary">Włącz tłumienie hałasu dla połączeń</string>
     <string name="national_roaming">Krajowy roaming danych</string>
     <string name="national_roaming_enable">Łączenie z usługami danych podczas korzystania z roamingu krajowego</string>
@@ -584,6 +580,7 @@
     <string name="flip_action_title">Akcja po odwróceniu</string>
     <string name="flip_action_dialog_title">Odwróć urządzenie do\u2026 urządzenia</string>
     <string name="flip_action_summary">Odwrócenie telefonu do dołu spowoduje <xliff:g id="action"> %s </xliff:g></string>
+    <string name="phone_number_label">Mój numer telefonu</string>
     <string name="phone_number_summary">Ustaw numer telefonu dla tego urządzenia</string>
     <string-array name="clir_display_values">
         <item>Domyślna wartość dla sieci</item>
@@ -621,13 +618,13 @@
         <item>hebrajski</item>
     </string-array>
     <string-array name="list_language_values">
-        <item>\"1\"</item>
-        <item>\"2\"</item>
-        <item>\"3\"</item>
-        <item>\"4\"</item>
-        <item>\"5\"</item>
-        <item>\"6\"</item>
-        <item>\"7\"</item>
+        <item>"1"</item>
+        <item>"2"</item>
+        <item>"3"</item>
+        <item>"4"</item>
+        <item>"5"</item>
+        <item>"6"</item>
+        <item>"7"</item>
     </string-array>
     <string-array name="cdma_system_select_choices">
         <item>Tylko główne</item>
@@ -638,8 +635,8 @@
         <item>NV</item>
     </string-array>
     <string-array name="cdma_subscription_values">
-        <item>\"0\"</item>
-        <item>\"1\"</item>
+        <item>"0"</item>
+        <item>"1"</item>
     </string-array>
     <string-array name="tty_mode_entries">
         <item>TTY wyłączony</item>
@@ -658,12 +655,12 @@
     </string-array>
     <string-array name="flip_action_setting_entries">
         <item>Nic nie rób</item>
-        <item>Mute ringer</item>
+        <item>Wycisz dzwonek</item>
         <item>Odrzuć połączenie</item>
     </string-array>
     <string-array name="flip_action_summary_entries">
         <item>Nic nie rób</item>
-        <item>mute the ringer</item>
+        <item>Wycisz dzwonek</item>
         <item>odrzuć połączenie</item>
     </string-array>
     <plurals name="phone_in_ecm_notification_time">
