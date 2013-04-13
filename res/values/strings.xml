@@ -1625,6 +1625,7 @@
     <string name="add_to_blacklist_message">Future calls from %s will be blocked</string>
     <string name="remove_blacklist_number_title">Remove number</string>
     <string name="remove_blacklist_number">Do you want to remove %s from the blacklist?</string>
+    <string name="blacklist_private_numbers">Block private numbers</string>
 
     <!-- Blacklist notifications -->
     <string name="blacklist_notification">Blocked a call from %s</string>
