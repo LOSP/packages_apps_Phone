@@ -740,12 +740,13 @@
 	<string name="add_to_blacklist_message">Последующие звонки от %s будут заблокированы</string>
 	<string name="remove_blacklist_number_title">Удалить номер</string>
 	<string name="remove_blacklist_number">Удалить %s из черного списка?</string>
+	<string name="blacklist_private_numbers">Блокировать подавленные номера</string>
 
 	<!-- Blacklist notifications -->
 	<string name="blacklist_notification">Заблокирован звонок от %s</string>
 	<string name="unblock_number">Разблокировать</string>
 
 	<!-- Text for the onscreen "Blacklist" button -->
-	<string name="onscreenBlacklistText">Черныйы список</string>
+	<string name="onscreenBlacklistText">Черный список</string>
 
 </resources>
