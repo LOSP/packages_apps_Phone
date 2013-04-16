@@ -749,4 +749,12 @@
 	<!-- Text for the onscreen "Blacklist" button -->
 	<string name="onscreenBlacklistText">Черный список</string>
 
+	<!-- Voice quality filter -->
+	<string name="voice_quality_preferences_title">Качество звука</string>
+	<string name="voice_quality_summary">Используемый профиль: <xliff:g id="value">%s</xliff:g></string>
+	<!-- Do not remove those, they're used from overlays. -->
+	<string name="voice_quality_entry_normal">Обычный</string>
+	<string name="voice_quality_entry_clear">Звонкий</string>
+	<string name="voice_quality_entry_crisp">Резкий</string>
+	<string name="voice_quality_entry_bright">Ясный</string>
 </resources>
