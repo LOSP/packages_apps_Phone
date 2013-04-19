@@ -169,8 +169,8 @@
     <string name="throttle_time_frame">Período uso datos</string>
     <string name="throttle_rate">Política velocidad datos</string>
     <string name="throttle_help">Más información</string>
-    <string name="throttle_status_subtext"><xliff:g id="used"> %1$ s </xliff:g> (<xliff:g id="used"> %2$ d </xliff:g> \u066A) de <xliff:g id="used"> %3$ s </xliff:g> maximum\nNext período período comienza en <xliff:g id="used"> %4$ d </xliff:g> días (<xliff:g id="used"> %5$ s </xliff:g>)</string>
-    <string name="throttle_data_usage_subtext"><xliff:g id="used"> %1$ s </xliff:g> (<xliff:g id="used"> %2$ d </xliff:g> \u066A) <xliff:g id="used"> %3$ s </xliff:g> período máximo</string>
+    <string name="throttle_status_subtext"><xliff:g id="used"> %1$s </xliff:g> (<xliff:g id="used"> %2$d </xliff:g> \u066A) de <xliff:g id="used"> %3$s </xliff:g> maximum\nNext período período comienza en <xliff:g id="used"> %4$d </xliff:g> días (<xliff:g id="used"> %5$s </xliff:g>)</string>
+    <string name="throttle_data_usage_subtext"><xliff:g id="used"> %1$s </xliff:g> (<xliff:g id="used"> %2$d </xliff:g> \u066A) <xliff:g id="used"> %3$s </xliff:g> período máximo</string>
     <string name="throttle_data_rate_reduced_subtext">Máx de <xliff:g id="USED_0">%1$s</xliff:g> superado."\n"Frec datos reducida a <xliff:g id="USED_1">%2$d</xliff:g> Kb/s</string>
     <string name="throttle_time_frame_subtext"><xliff:g id="USED_0">%1$d</xliff:g>% del ciclo transcurrido."\n"Próx período en <xliff:g id="USED_1">%2$d</xliff:g> días (<xliff:g id="USED_2">%3$s</xliff:g>)</string>
     <string name="throttle_rate_subtext">Frec datos se reduce a <xliff:g id="USED">%1$d</xliff:g> Kb/s si se supera límite uso datos</string>
@@ -552,7 +552,7 @@
     <string name="voicemail_notification_vibrate_when_title" msgid="8731372580674292759">Vibrar</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="8995274609647451109">Vibrar</string>
     <string name="voicemail_notification_ringtone_title">Tono</string>
-    <string name="default_notification_description">Sonido por defecto (<xliff:g id="default_sound_title"> %1$ s </xliff:g>)</string>
+    <string name="default_notification_description">Sonido por defecto (<xliff:g id="default_sound_title"> %1$s </xliff:g>)</string>
     <string name="ringtone_title" msgid="5379026328015343686">Tono del teléfono</string>
     <string name="vibrate_on_ring_title">Vibrar al sonar</string>
     <string name="dtmf_tone_enable_title">Sonar al marcar número</string>
