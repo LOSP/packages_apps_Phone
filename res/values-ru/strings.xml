@@ -687,8 +687,8 @@
     <string name="vibrate_outgoing">Вибрировать при ответе</string>
     <string name="vibrate_call_waiting">Вибрировать при ожидании</string>
     <string name="vibrate_hangup">Вибрировать при отбое</string>
-    <string name="vibrate_45">Вибрировать каждые 45 сек</string>
-    <string name="vibrate_45_sum">Вибрировать каждые 45 секунд в течение исходящего звонка</string>
+    <string name="vibrate_45">Вибрировать раз в минуту</string>
+    <string name="vibrate_45_sum">Вибрировать каждую 45ю секунду в течение исходящего звонка</string>
     <string name="rejected_as_missed">Отклоненные вызовы как пропущенные</string>
     <string name="rejected_as_missed_sum">Помечать в журнале отклоненные вызовы как пропущенные</string>
     <string name="show_ssn_label">Уведомления о событиях</string>
@@ -740,7 +740,8 @@
     <string name="add_to_blacklist_message">Последующие звонки от %s будут заблокированы</string>
     <string name="remove_blacklist_number_title">Удалить номер</string>
     <string name="remove_blacklist_number">Удалить %s из черного списка?</string>
-    <string name="blacklist_private_numbers">Блокировать подавленные номера</string>
+    <string name="blacklist_private_numbers_title">Скрытые номера</string>
+    <string name="blacklist_private_numbers_summary">Блокировать входящие звонки со скрытых (\"подавленных\") номеров</string>
 
     <!-- Blacklist notifications -->
     <string name="blacklist_notification">Заблокирован звонок от %s</string>
