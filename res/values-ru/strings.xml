@@ -53,6 +53,8 @@
     <string name="ussdRunning" msgid="485588686340541690">"Выполняется запрос USSD…"</string>
     <string name="mmiCancelled" msgid="2771923949751842276">"Код MMI отменен"</string>
     <string name="cancel" msgid="5044513931633602634">"Отмена"</string>
+    <!-- Toast string displayed to user if the input in MMI dialog is < 1 or > 160 -->
+    <string name="enter_input">Длина сообщения USSD должна быть между <xliff:g id="min_len" >%d</xliff:g> и <xliff:g id="max_len" >%d</xliff:g> символов. Пожалуйста, попробуйте еще раз.</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Управление конференц-связью"</string>
     <string name="audio_mode_speaker" msgid="27649582100085266">"Динамик"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"Динамик гарнитуры"</string>
@@ -745,6 +747,7 @@
 
     <!-- Blacklist notifications -->
     <string name="blacklist_notification">Заблокирован звонок от %s</string>
+    <string name="blacklist_notification_multiple"><xliff:g id="count">%d</xliff:g> звонков заблокировано</string>
     <string name="unblock_number">Разблокировать</string>
 
     <!-- Text for the onscreen "Blacklist" button -->
