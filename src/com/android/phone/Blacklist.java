@@ -21,6 +21,8 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.internal.telephony.CallerInfo;
+
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
@@ -47,8 +49,9 @@ class Blacklist {
     // Blacklist matching type
     public final static int MATCH_NONE = 0;
     public final static int MATCH_PRIVATE = 1;
-    public final static int MATCH_LIST = 2;
-    public final static int MATCH_REGEX = 3;
+    public final static int MATCH_UNKNOWN = 2;
+    public final static int MATCH_LIST = 3;
+    public final static int MATCH_REGEX = 4;
 
     public Blacklist(Context context) {
         mContext = context;
@@ -139,7 +142,7 @@ class Blacklist {
     /**
      * Check if the number is in the blacklist
      * @param s: Number to check
-     * @return one of: MATCH_NONE, MATCH_PRIVATE, MATCH_LIST or MATCH_REGEX
+     * @return one of: MATCH_NONE, MATCH_PRIVATE, MATCH_UNKNOWN, MATCH_LIST or MATCH_REGEX
      */
     public int isListed(String s) {
         if (!PhoneUtils.PhoneSettings.isBlacklistEnabled(mContext)) {
@@ -151,13 +154,21 @@ class Blacklist {
     /**
      * See if the number is in the blacklist
      * @param s: Number to check
-     * @return one of: MATCH_NONE, MATCH_PRIVATE, MATCH_LIST or MATCH_REGEX
+     * @return one of: MATCH_NONE, MATCH_PRIVATE, MATCH_UNKNOWN, MATCH_LIST or MATCH_REGEX
      */
     private int matchesBlacklist(String s) {
-        // Private number matching
-        if (PhoneUtils.PhoneSettings.isBlacklistPrivateNumberEnabled(mContext)
-                && s.equals(PRIVATE_NUMBER)) {
-            return MATCH_PRIVATE;
+        // Private and unknown number matching
+        if (PhoneUtils.PhoneSettings.isBlacklistPrivateNumberEnabled(mContext)) {
+            if (s.equals(PRIVATE_NUMBER)) {
+                return MATCH_PRIVATE;
+            }
+        }
+
+        if (PhoneUtils.PhoneSettings.isBlacklistUnknownNumberEnabled(mContext)) {
+            CallerInfo ci = CallerInfo.getCallerInfo(mContext, s);
+            if (!ci.contactExists) {
+                return MATCH_UNKNOWN;
+            }
         }
 
         // Standard list matching
