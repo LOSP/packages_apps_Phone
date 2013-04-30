@@ -528,7 +528,6 @@
     <string name="respond_via_sms_custom_message">Wiadomość niestandardowa</string>
     <string name="respond_via_sms_setting_title">Szybkie odpowiedzi</string>
     <string name="respond_via_sms_setting_title_2">Edytuj szybkie odpowiedzi</string>
-    <string name="respond_via_sms_setting_summary">[empty string]</string>
     <string name="respond_via_sms_edittext_dialog_title">Szybka odpowiedź</string>
     <string name="respond_via_sms_confirmation_format">Wiadomość wysłano na numer <xliff:g id="PHONE_NUMBER">%s</xliff:g>.</string>
     <string name="description_image_button_one">jeden</string>

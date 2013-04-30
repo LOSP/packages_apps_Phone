@@ -528,7 +528,6 @@
     <string name="respond_via_sms_custom_message">Thông báo tùy chỉnh</string>
     <string name="respond_via_sms_setting_title">Trả lời nhanh</string>
     <string name="respond_via_sms_setting_title_2">Chỉnh sửa trả lời nhanh</string>
-    <string name="respond_via_sms_setting_summary">[chuỗi rỗng]</string>
     <string name="respond_via_sms_edittext_dialog_title">Trả lời nhanh</string>
     <string name="respond_via_sms_confirmation_format">Đã gửi tin nhắn tới <xliff:g id="PHONE_NUMBER">%s</xliff:g>.</string>
     <string name="description_image_button_one">một</string>

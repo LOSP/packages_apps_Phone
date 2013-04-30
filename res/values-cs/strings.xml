@@ -526,7 +526,6 @@
     <string name="respond_via_sms_custom_message">Vlastní zpráva</string>
     <string name="respond_via_sms_setting_title">Rychlé odpovědi</string>
     <string name="respond_via_sms_setting_title_2">Upravit rychlé odpovědi</string>
-    <string name="respond_via_sms_setting_summary">[empty string]</string>
     <string name="respond_via_sms_edittext_dialog_title">Rychlá odpověď</string>
     <string name="respond_via_sms_confirmation_format">Zpráva byla odeslána na číslo <xliff:g id="PHONE_NUMBER">%s</xliff:g>.</string>
     <string name="description_image_button_one">jedna</string>

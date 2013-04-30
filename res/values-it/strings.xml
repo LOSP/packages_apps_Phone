@@ -543,7 +543,6 @@
     <string name="respond_via_sms_custom_message">Messaggio personalizzato</string>
     <string name="respond_via_sms_setting_title">Risposte rapide</string>
     <string name="respond_via_sms_setting_title_2">Modifica risposte rapide</string>
-    <string name="respond_via_sms_setting_summary">[stringa vuota]</string>
     <string name="respond_via_sms_edittext_dialog_title">Risposta rapida</string>
     <string name="respond_via_sms_confirmation_format">Messaggio inviato a <xliff:g id="PHONE_NUMBER">%s</xliff:g>.</string>
     <string name="description_image_button_one">uno</string>

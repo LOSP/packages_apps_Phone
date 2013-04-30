@@ -528,7 +528,6 @@
     <string name="respond_via_sms_custom_message">自定义短信</string>
     <string name="respond_via_sms_setting_title">快速回复</string>
     <string name="respond_via_sms_setting_title_2">修改快速回复</string>
-    <string name="respond_via_sms_setting_summary">[空字符串]</string>
     <string name="respond_via_sms_edittext_dialog_title">快速回复</string>
     <string name="respond_via_sms_confirmation_format">讯息已发送至 <xliff:g id="PHONE_NUMBER">%s</xliff:g>。</string>
     <string name="description_image_button_one">一</string>

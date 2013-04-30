@@ -528,7 +528,6 @@
     <string name="respond_via_sms_custom_message">Egyéni üzenet</string>
     <string name="respond_via_sms_setting_title">Gyors válaszok</string>
     <string name="respond_via_sms_setting_title_2">Gyors válaszok szerkesztése</string>
-    <string name="respond_via_sms_setting_summary">[empty string]</string>
     <string name="respond_via_sms_edittext_dialog_title">Gyors válasz</string>
     <string name="respond_via_sms_confirmation_format">Üzenet elküldve ide: <xliff:g id="PHONE_NUMBER">%s</xliff:g>.</string>
     <string name="description_image_button_one">egy</string>
