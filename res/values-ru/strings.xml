@@ -735,19 +735,24 @@
     <string name="blacklist_notify">Показывать уведомление</string>
     <string name="blacklist_regex_title">Использовать маски</string>
     <string name="blacklist_regex_summary">Использовать . как любой символ и * для повторения. Например, 123.* блокирует номера, начинающиеся с 123, а .*123.* содержащие 123</string>
-
+    <string name="blacklist_private_numbers_title">Скрытые номера</string>
+    <string name="blacklist_private_numbers_summary">Блокировать входящие звонки со скрытых (\"подавленных\") номеров</string>
+    <string name="blacklist_unknown_numbers_title">Неизвестные номера</string>
+    <string name="blacklist_unknown_numbers_summary">Блокировать входящие звонки с номеров не в списке контактов</string>
+    
     <!-- Blacklist management -->
     <string name="add_blacklist_number">Добавить номер телефона</string>
     <string name="add_to_blacklist">Добавить в черный список</string>
     <string name="add_to_blacklist_message">Последующие звонки от %s будут заблокированы</string>
     <string name="remove_blacklist_number_title">Удалить номер</string>
     <string name="remove_blacklist_number">Удалить %s из черного списка?</string>
-    <string name="blacklist_private_numbers_title">Скрытые номера</string>
-    <string name="blacklist_private_numbers_summary">Блокировать входящие звонки со скрытых (\"подавленных\") номеров</string>
 
     <!-- Blacklist notifications -->
     <string name="blacklist_notification">Заблокирован звонок от %s</string>
     <string name="blacklist_notification_multiple"><xliff:g id="count">%d</xliff:g> звонков заблокировано</string>
+    <string name="blacklist_notification_private_number">Заблокирован вызов со скрытого номера</string>
+    <string name="blacklist_notification_list_private">Скрытый</string>
+    <string name="blacklist_notification_unknown_number">Заблокирован неизвестный номер %s</string>
     <string name="unblock_number">Разблокировать</string>
 
     <!-- Text for the onscreen "Blacklist" button -->
