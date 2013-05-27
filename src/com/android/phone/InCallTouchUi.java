@@ -82,6 +82,7 @@ public class InCallTouchUi extends FrameLayout
 
     // UI containers / elements
     private GlowPadView mIncomingCallWidget;  // UI used for an incoming call
+    private FrameLayout mIncomingCallWidgetFramelayout;
     private boolean mIncomingCallWidgetIsFadingOut;
     private boolean mIncomingCallWidgetShouldBeReset = true;
 
@@ -162,6 +163,9 @@ public class InCallTouchUi extends FrameLayout
         // "Drag-to-answer" widget for incoming calls.
         mIncomingCallWidget = (GlowPadView) findViewById(R.id.incomingCallWidget);
         mIncomingCallWidget.setOnTriggerListener(this);
+
+        // Get framelayout for background changes @transparent ui incall screen
+        mIncomingCallWidgetFramelayout = (FrameLayout) findViewById(R.id.incomingCallWidgetFrameLayout);
 
         // Container for the UI elements shown while on a regular call.
         mInCallControls = findViewById(R.id.inCallControls);
@@ -1191,6 +1195,14 @@ public class InCallTouchUi extends FrameLayout
             mIncomingCallWidgetIsFadingOut = false;
         }
         mIncomingCallWidget.setAlpha(1.0f);
+
+        if (mIncomingCallWidgetFramelayout != null) {
+            if (PhoneUtils.PhoneSettings.transparentInCallWidget(this.getContext())) {
+                mIncomingCallWidgetFramelayout.setBackgroundResource(android.R.color.transparent);
+            } else {
+                mIncomingCallWidgetFramelayout.setBackgroundResource(R.color.incall_call_banner_background);
+            }
+        }
 
         // Update the GlowPadView widget's targets based on the state of
         // the ringing call.  (Specifically, we need to disable the

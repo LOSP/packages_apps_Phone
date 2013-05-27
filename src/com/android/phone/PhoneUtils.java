@@ -422,6 +422,9 @@ public class PhoneUtils {
             String s = getPrefs(context).getString("flip_action", "0");
             return Integer.parseInt(s);
         }
+        static boolean transparentInCallWidget(Context context) {
+            return getPrefs(context).getBoolean("transparent_in_call_widget", false);
+        }
         static boolean rejectedAsMissed(Context context) {
             return getPrefs(context).getBoolean("button_rejected_as_missed", false);
         }

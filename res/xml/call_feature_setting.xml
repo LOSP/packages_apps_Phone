@@ -22,6 +22,14 @@
         android:title="@string/preference_category_ringtone"
         android:persistent="false">
 
+        <ListPreference
+            android:key="flip_action"
+            android:title="@string/flip_action_title"
+            android:dialogTitle="@string/flip_action_dialog_title"
+            android:entries="@array/flip_action_setting_entries"
+            android:entryValues="@array/flip_action_setting_values"
+            android:defaultValue="0" />
+
         <com.android.phone.DefaultRingtonePreference
             android:key="button_ringtone_key"
             android:title="@string/ringtone_title"
@@ -35,18 +43,33 @@
             android:persistent="false"
             android:defaultValue="false" />
 
-        <ListPreference
-            android:key="flip_action"
-            android:title="@string/flip_action_title"
-            android:dialogTitle="@string/flip_action_dialog_title"
-            android:entries="@array/flip_action_setting_entries"
-            android:entryValues="@array/flip_action_setting_values"
-            android:defaultValue="0" />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:key="pref_advanced_settings"
         android:title="@string/advanced_setting">
+
+        <PreferenceScreen
+            android:key="button_blacklist"
+            android:title="@string/blacklist_title"
+            android:persistent="false">
+            <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.phone"
+                android:targetClass="com.android.phone.BlacklistSetting" />
+        </PreferenceScreen>
+
+        <CheckBoxPreference
+            android:key="button_calllog_after_call"
+            android:title="@string/calllog_after_call"
+            android:persistent="true"
+            android:defaultValue="true"
+            android:summary="@string/calllog_after_call_summary" />
+
+        <CheckBoxPreference
+            android:key="button_rejected_as_missed"
+            android:title="@string/rejected_as_missed"
+            android:persistent="true"
+            android:summary="@string/rejected_as_missed_sum" />
 
         <CheckBoxPreference
             android:key="button_vibrate_outgoing"
@@ -69,27 +92,35 @@
             android:persistent="true"
             android:summary="@string/vibrate_45_sum" />
 
-        <CheckBoxPreference
-            android:key="button_calllog_after_call"
-            android:title="@string/calllog_after_call"
-            android:persistent="true"
-            android:defaultValue="true"
-            android:summary="@string/calllog_after_call_summary" />
-        <CheckBoxPreference
-            android:key="button_rejected_as_missed"
-            android:title="@string/rejected_as_missed"
-            android:persistent="true"
-            android:summary="@string/rejected_as_missed_sum" />
-
-        <PreferenceScreen
-            android:key="button_blacklist"
-            android:title="@string/blacklist_title"
-            android:persistent="false">
-            <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.phone"
-                android:targetClass="com.android.phone.BlacklistSetting" />
-        </PreferenceScreen>
     </PreferenceCategory>
+
+  <PreferenceCategory
+      android:key="misc_category"
+      android:title="@string/additional_gsm_call_settings"
+      android:persistent="false" />
+
+  <PreferenceScreen
+      android:title="@string/dialer_ui_settings_title"
+      android:summary="@string/dialer_ui_settings_summary"
+      android:persistent="false">
+
+      <intent android:action="android.intent.action.MAIN"
+          android:targetPackage="com.android.contacts"
+          android:targetClass="com.android.contacts.preference.DialpadPreferenceActivity"/>
+  </PreferenceScreen>
+
+  <CheckBoxPreference
+      android:key="button_play_dtmf_tone"
+      android:title="@string/dtmf_tone_enable_title"
+      android:persistent="false"
+      android:defaultValue="true" />
+
+  <CheckBoxPreference
+      android:key="transparent_in_call_widget"
+      android:title="@string/transparent_in_call_widget"
+      android:summary="@string/transparent_in_call_widget_summary"
+      android:persistent="true"
+      android:defaultValue="false" />
 
   <PreferenceCategory
       android:key="button_misc_category_key"
@@ -150,12 +181,6 @@
           android:persistent="true"
           />
   </PreferenceScreen>
-
-  <CheckBoxPreference
-      android:key="button_play_dtmf_tone"
-      android:title="@string/dtmf_tone_enable_title"
-      android:persistent="false"
-      android:defaultValue="true" />
 
   <PreferenceScreen
       android:key="button_respond_via_sms_key"
@@ -237,16 +262,6 @@
         <intent android:action="android.intent.action.MAIN"
             android:targetPackage="com.android.phone"
             android:targetClass="com.android.phone.CdmaCallOptions"/>
-    </PreferenceScreen>
-
-    <PreferenceScreen
-        android:title="@string/dialer_ui_settings_title"
-        android:summary="@string/dialer_ui_settings_summary"
-        android:persistent="false">
-
-        <intent android:action="android.intent.action.MAIN"
-            android:targetPackage="com.android.contacts"
-            android:targetClass="com.android.contacts.preference.DialpadPreferenceActivity"/>
     </PreferenceScreen>
 
 </PreferenceScreen>

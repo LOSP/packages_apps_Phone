@@ -1652,4 +1652,8 @@
     <string name="voice_quality_entry_crisp">Crisp</string>
     <string name="voice_quality_entry_bright">Bright</string>
 
+    <!-- Transparent in call widget -->
+    <string name="transparent_in_call_widget">Transparent in call screen</string>
+    <string name="transparent_in_call_widget_summary">Shows the complete contact picture on incomming calls</string>
+
 </resources>
