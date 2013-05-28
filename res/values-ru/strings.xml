@@ -766,4 +766,8 @@
     <string name="voice_quality_entry_clear">Звонкий</string>
     <string name="voice_quality_entry_crisp">Резкий</string>
     <string name="voice_quality_entry_bright">Ясный</string>
+    
+    <!-- Transparent in call widget -->
+    <string name="transparent_in_call_widget">Прозрачный экран входящего звонка</string>
+    <string name="transparent_in_call_widget_summary">Показывать фото звонящего на входящем вызове целиком, без черных полос</string>
 </resources>
