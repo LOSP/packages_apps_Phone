@@ -962,6 +962,13 @@ public class DTMFTwelveKeyDialer implements View.OnTouchListener, View.OnKeyList
             stopTone();
         }
 
+        // Before we go ahead and start a tone, we need to make sure that any pending
+        // stop-tone message is processed.
+        if (mHandler.hasMessages(DTMF_STOP)) {
+            mHandler.removeMessages(DTMF_STOP);
+            stopTone();
+        }
+
         if (DBG) log("startDtmfTone()...");
 
         // For Short DTMF we need to play the local tone for fixed duration

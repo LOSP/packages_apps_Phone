@@ -75,6 +75,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_APN_SETTINGS" />
     <uses-permission android:name="android.permission.BROADCAST_SMS"/>
+    <uses-permission android:name="android.permission.INTERCEPT_SMS"/>
     <uses-permission android:name="android.permission.BROADCAST_WAP_PUSH"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -108,6 +109,12 @@
                       android:exported="true"
                       android:readPermission="android.permission.READ_CONTACTS"
                       android:writePermission="android.permission.WRITE_CONTACTS" />
+            <!-- Workaround for non saved phone number -->
+            <receiver android:name=".MyPhoneNumber">
+                <intent-filter>
+                    <action android:name="android.intent.action.SIM_STATE_CHANGED" />
+                </intent-filter>
+            </receiver>
 
         <!-- Dialer UI that only allows emergency calls -->
         <activity android:name="EmergencyDialer"
@@ -295,7 +302,8 @@
         <activity android:name="NetworkSetting"
                 android:label="@string/networks"
                 android:configChanges="orientation|screenSize|keyboardHidden"
-                android:theme="@android:style/Theme.Holo.DialogWhenLarge">
+                android:theme="@android:style/Theme.Holo.DialogWhenLarge"
+                android:parentActivityName="Settings$WifiSettingsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.NETWORK_OPERATOR_SETTINGS" />
@@ -437,6 +445,17 @@
             </intent-filter>
         </activity>
 
+        <!-- "Blacklist settings" UI, used only on voice-capable phone devices. -->
+        <activity android:name="BlacklistSetting"
+                android:exported="false"
+                android:label="@string/blacklist_title"
+                android:configChanges="orientation|screenSize|keyboardHidden"
+                android:theme="@android:style/Theme.Holo.DialogWhenLarge">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
         <!-- bluetooth phone service -->
         <service android:name="BluetoothPhoneService">
             <intent-filter>
@@ -502,6 +521,13 @@
                 android:configChanges="orientation|screenSize|keyboardHidden">
         </activity>
 
+        <receiver android:name="com.android.phone.PhoneToggler" android:permission="com.android.phone.CHANGE_NETWORK_MODE">
+            <intent-filter>
+                <action android:name="com.android.internal.telephony.REQUEST_NETWORK_MODE" />
+                <action android:name="com.android.internal.telephony.MODIFY_NETWORK_MODE" />
+            </intent-filter>
+        </receiver>
+
         <activity android:name="RespondViaSmsManager$Settings"
                 android:label="@string/respond_via_sms_setting_title"
                 android:configChanges="orientation|screenSize|keyboardHidden"
@@ -527,4 +553,9 @@
         </receiver>
 
     </application>
+    <permission android:name="com.android.phone.CHANGE_NETWORK_MODE"
+        android:label="@string/perm_change_mobile_network"
+        android:description="@string/perm_change_mobile_network_desc"
+        android:permissionGroup="android.permission-group.COST_MONEY"
+        android:protectionLevel="dangerous" />
 </manifest>

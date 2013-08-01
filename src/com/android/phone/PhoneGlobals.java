@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2006 The Android Open Source Project
+ * Blacklist - Copyright (C) 2013 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +19,7 @@ package com.android.phone;
 
 import android.app.Activity;
 import android.app.KeyguardManager;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
@@ -35,6 +37,7 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.res.Configuration;
 import android.media.AudioManager;
+import android.media.AudioSystem;
 import android.net.Uri;
 import android.os.AsyncResult;
 import android.os.Binder;
@@ -56,6 +59,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Slog;
 import android.view.KeyEvent;
+import android.widget.Toast;
 
 import com.android.internal.telephony.Call;
 import com.android.internal.telephony.CallManager;
@@ -168,6 +172,7 @@ public class PhoneGlobals extends ContextWrapper
     CallNotifier notifier;
     NotificationMgr notificationMgr;
     Ringer ringer;
+    Blacklist blackList;
     IBluetoothHeadsetPhone mBluetoothPhone;
     PhoneInterfaceManager phoneMgr;
     CallManager mCM;
@@ -255,6 +260,11 @@ public class PhoneGlobals extends ContextWrapper
     private boolean mTtyEnabled;
     // Current TTY operating mode selected by user
     private int mPreferredTtyMode = Phone.TTY_MODE_OFF;
+
+    // For adding to Blacklist from call log
+    private static final String REMOVE_BLACKLIST = "com.android.phone.REMOVE_BLACKLIST";
+    private static final String EXTRA_NUMBER = "number";
+    private static final String EXTRA_FROM_NOTIFICATION = "fromNotification";
 
     /**
      * Set the restore mute state flag. Used when we are setting the mute state
@@ -484,6 +494,8 @@ public class PhoneGlobals extends ContextWrapper
 
             ringer = Ringer.init(this);
 
+            blackList = new Blacklist(this);
+
             // before registering for phone state changes
             mPowerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
             mWakeLock = mPowerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, LOG_TAG);
@@ -566,10 +578,13 @@ public class PhoneGlobals extends ContextWrapper
             intentFilter.addAction(TelephonyIntents.ACTION_RADIO_TECHNOLOGY_CHANGED);
             intentFilter.addAction(TelephonyIntents.ACTION_SERVICE_STATE_CHANGED);
             intentFilter.addAction(TelephonyIntents.ACTION_EMERGENCY_CALLBACK_MODE_CHANGED);
+            intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
+            intentFilter.addAction(Intent.ACTION_SCREEN_ON);
             if (mTtyEnabled) {
                 intentFilter.addAction(TtyIntent.TTY_PREFERRED_MODE_CHANGE_ACTION);
             }
             intentFilter.addAction(AudioManager.RINGER_MODE_CHANGED_ACTION);
+            intentFilter.addAction(REMOVE_BLACKLIST);
             registerReceiver(mReceiver, intentFilter);
 
             // Use a separate receiver for ACTION_MEDIA_BUTTON broadcasts,
@@ -751,6 +766,14 @@ public class PhoneGlobals extends ContextWrapper
                 Uri.fromParts(Constants.SCHEME_SMSTO, number, null),
                 context, NotificationBroadcastReceiver.class);
         return PendingIntent.getBroadcast(context, 0, intent, 0);
+    }
+
+    /* package */ static PendingIntent getUnblockNumberFromNotificationPendingIntent(
+            Context context, String number) {
+        Intent intent = new Intent(REMOVE_BLACKLIST);
+        intent.putExtra(EXTRA_NUMBER, number);
+        intent.putExtra(EXTRA_FROM_NOTIFICATION, true);
+        return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     private static String getCallScreenClassName() {
@@ -1211,6 +1234,12 @@ public class PhoneGlobals extends ContextWrapper
      */
     /* package */ void updatePhoneState(PhoneConstants.State state) {
         if (state != mLastPhoneState) {
+
+            String voiceQualParam = PhoneUtils.PhoneSettings.getVoiceQualityParameter(this);
+            if (voiceQualParam != null) {
+                AudioSystem.setParameters(voiceQualParam);
+            }
+
             mLastPhoneState = state;
             updateProximitySensorMode(state);
 
@@ -1520,6 +1549,25 @@ public class PhoneGlobals extends ContextWrapper
                         AudioManager.RINGER_MODE_NORMAL);
                 if (ringerMode == AudioManager.RINGER_MODE_SILENT) {
                     notifier.silenceRinger();
+                }
+            } else if (action.equals(Intent.ACTION_SCREEN_OFF) ||
+                action.equals(Intent.ACTION_SCREEN_ON)) {
+                if (VDBG) Log.d(LOG_TAG, "mReceiver: ACTION_SCREEN_OFF" +
+                        " / ACTION_SCREEN_ON");
+                /*
+                 * Disable Acclerometer Listener while in-call and the screen is off.
+                 * This is done to ensure that power consumption is kept to a minimum
+                 * in such a scenario
+                 */
+                if(mAccelerometerListener != null) {
+                    mAccelerometerListener.enable(mLastPhoneState == PhoneConstants.State.OFFHOOK
+                            && action.equals(Intent.ACTION_SCREEN_ON));
+                }
+            } else if (action.equals(REMOVE_BLACKLIST)) {
+                if (intent.getBooleanExtra(EXTRA_FROM_NOTIFICATION, false)) {
+                    // Dismiss the notification that brought us here
+                    notificationMgr.cancelBlacklistedCallNotification();
+                    blackList.delete(intent.getStringExtra(EXTRA_NUMBER));
                 }
             }
         }

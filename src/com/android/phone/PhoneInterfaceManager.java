@@ -31,6 +31,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
 import android.os.ServiceManager;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.telephony.NeighboringCellInfo;
 import android.telephony.CellInfo;
@@ -44,6 +45,7 @@ import com.android.internal.telephony.ITelephony;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.CallManager;
 import com.android.internal.telephony.PhoneConstants;
+import com.android.internal.telephony.RILConstants;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -63,6 +65,7 @@ public class PhoneInterfaceManager extends ITelephony.Stub {
     private static final int CMD_ANSWER_RINGING_CALL = 4;
     private static final int CMD_END_CALL = 5;  // not used yet
     private static final int CMD_SILENCE_RINGER = 6;
+    private static final int CMD_TOGGLE_LTE = 7; // not used yet
 
     /** The singleton instance. */
     private static PhoneInterfaceManager sInstance;
@@ -290,6 +293,38 @@ public class PhoneInterfaceManager extends ITelephony.Stub {
         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse(url));
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mApp.startActivity(intent);
+    }
+
+    public void toggleLTE(boolean on) {
+        int network = -1;
+        boolean usesQcLte = SystemProperties.getBoolean(
+                        "ro.config.qc_lte_network_modes", false);
+
+        if (getLteOnGsmMode() != 0) {
+            if (on) {
+                network = Phone.NT_MODE_LTE_GSM_WCDMA;
+            } else {
+                network = Phone.NT_MODE_WCDMA_PREF;
+            }
+        } else if (usesQcLte) {
+            if (on) {
+                network = RILConstants.NETWORK_MODE_LTE_CDMA_EVDO;
+            } else {
+                network = Phone.NT_MODE_CDMA;
+            }
+        } else {
+            if (on) {
+                if ((network = mApp.getResources().getInteger(R.integer.toggleLTE_lte_cdma_nt_mode)) == -1)
+                    network = Phone.NT_MODE_GLOBAL;
+            } else {
+                network = Phone.NT_MODE_CDMA;
+            }
+        }
+
+        mPhone.setPreferredNetworkType(network,
+                mMainThreadHandler.obtainMessage(CMD_TOGGLE_LTE));
+        android.provider.Settings.Global.putInt(mApp.getContentResolver(),
+                android.provider.Settings.Global.PREFERRED_NETWORK_MODE, network);
     }
 
     private boolean showCallScreenInternal(boolean specifyInitialDialpadState,
@@ -880,10 +915,6 @@ public class PhoneInterfaceManager extends ITelephony.Stub {
      */
     public int getLteOnCdmaMode() {
         return mPhone.getLteOnCdmaMode();
-    }
-
-    public void toggleLTE(boolean on) {
-        // add temporaly back till we remerged our features
     }
 
     public int getLteOnGsmMode() {
