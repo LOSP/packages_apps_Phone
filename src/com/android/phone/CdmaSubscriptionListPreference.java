@@ -40,7 +40,7 @@ public class CdmaSubscriptionListPreference extends ListPreference {
 
     //preferredSubscriptionMode  0 - RUIM/SIM, preferred
     //                           1 - NV
-    static final int preferredSubscriptionMode = CDMA_SUBSCRIPTION_NV;
+    static final int preferredSubscriptionMode = CDMA_SUBSCRIPTION_RUIM_SIM;
 
     private Phone mPhone;
     private CdmaSubscriptionButtonHandler mHandler;
@@ -54,8 +54,7 @@ public class CdmaSubscriptionListPreference extends ListPreference {
     }
 
     private void setCurrentCdmaSubscriptionModeValue() {
-        int cdmaSubscriptionMode = Settings.Global.getInt(mPhone.getContext().getContentResolver(),
-                Settings.Global.CDMA_SUBSCRIPTION_MODE, preferredSubscriptionMode);
+        int cdmaSubscriptionMode = preferredSubscriptionMode;
         setValue(Integer.toString(cdmaSubscriptionMode));
     }
 
@@ -82,16 +81,7 @@ public class CdmaSubscriptionListPreference extends ListPreference {
         int buttonCdmaSubscriptionMode = Integer.valueOf(getValue()).intValue();
         Log.d(LOG_TAG, "Setting new value " + buttonCdmaSubscriptionMode);
         int statusCdmaSubscriptionMode;
-        switch(buttonCdmaSubscriptionMode) {
-            case CDMA_SUBSCRIPTION_NV:
-                statusCdmaSubscriptionMode = Phone.CDMA_SUBSCRIPTION_NV;
-                break;
-            case CDMA_SUBSCRIPTION_RUIM_SIM:
-                statusCdmaSubscriptionMode = Phone.CDMA_SUBSCRIPTION_RUIM_SIM;
-                break;
-            default:
-                statusCdmaSubscriptionMode = Phone.PREFERRED_CDMA_SUBSCRIPTION;
-        }
+        statusCdmaSubscriptionMode = Phone.CDMA_SUBSCRIPTION_RUIM_SIM;
 
         // Set the CDMA subscription mode, when mode has been successfully changed
         // handleSetCdmaSubscriptionMode will be invoked and the value saved.
@@ -120,7 +110,7 @@ public class CdmaSubscriptionListPreference extends ListPreference {
 
             if (ar.exception == null) {
                 // Get the original string entered by the user
-                int cdmaSubscriptionMode = Integer.valueOf((String) ar.userObj).intValue();
+                int cdmaSubscriptionMode = Phone.CDMA_SUBSCRIPTION_RUIM_SIM;
                 Settings.Global.putInt(mPhone.getContext().getContentResolver(),
                         Settings.Global.CDMA_SUBSCRIPTION_MODE,
                         cdmaSubscriptionMode );
