@@ -52,6 +52,7 @@ import com.android.internal.telephony.PhoneConstants;
 
 import java.util.List;
 
+import com.android.phone.location.PhoneLocation;
 
 /**
  * "Call card" UI element: the in-call screen contains a tiled layout of call
@@ -1290,11 +1291,14 @@ public class CallCard extends LinearLayout
                         // TODO (CallerInfoAsyncQuery cleanup): Fix the CallerInfo
                         // query to only do the geoDescription lookup in the first
                         // place for incoming calls.
-                        displayNumber = info.geoDescription;  // may be null
+                        // displayNumber = info.geoDescription;
+                        // may be null
+                        // So we use Location as Description;
+                        displayNumber = PhoneLocation.getCityFromPhone(number.replaceAll(" ", ""));
                     }
 
                     if (DBG) log("  ==>  no name; falling back to number: displayName '"
-                                 + displayName + "', displayNumber '" + displayNumber + "'");
+                                 + displayName + "', displayNumber '" + displayNumber + "'" + PhoneLocation.getCityFromPhone(number.replaceAll(" ", "")));
                 }
             } else {
                 // We do have a valid "name" in the CallerInfo.  Display that
@@ -1351,15 +1355,18 @@ public class CallCard extends LinearLayout
             }
             mName.setVisibility(View.VISIBLE);
 
+            String location = null;
             if (displayNumber != null && !call.isGeneric()) {
+                location = PhoneLocation.getCityFromPhone(displayNumber.replaceAll(" ", ""));
                 mPhoneNumber.setText(displayNumber);
                 mPhoneNumber.setVisibility(View.VISIBLE);
             } else {
+                location = PhoneLocation.getCityFromPhone(displayName.replaceAll(" ", ""));
                 mPhoneNumber.setVisibility(View.GONE);
             }
 
-            if (label != null && !call.isGeneric()) {
-                mLabel.setText(label);
+            if (location != null && !call.isGeneric()) {
+                mLabel.setText(location);
                 mLabel.setVisibility(View.VISIBLE);
             } else {
                 mLabel.setVisibility(View.GONE);
