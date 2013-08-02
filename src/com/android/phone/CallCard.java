@@ -1357,11 +1357,19 @@ public class CallCard extends LinearLayout
 
             String location = null;
             if (displayNumber != null && !call.isGeneric()) {
-                location = PhoneLocation.getCityFromPhone(displayNumber.replaceAll(" ", ""));
+                if (mContext.getResources().getConfiguration().locale.getCountry().equals("CN") || mContext.getResources().getConfiguration().locale.getCountry().equals("TW")) {
+                    location = PhoneLocation.getCityFromPhone(displayNumber.replaceAll(" ", ""));
+                } else {
+                    location = label;
+                }
                 mPhoneNumber.setText(displayNumber);
                 mPhoneNumber.setVisibility(View.VISIBLE);
             } else {
-                location = PhoneLocation.getCityFromPhone(displayName.replaceAll(" ", ""));
+                if (mContext.getResources().getConfiguration().locale.getCountry().equals("CN") || mContext.getResources().getConfiguration().locale.getCountry().equals("TW")) {
+                    location = PhoneLocation.getCityFromPhone(displayName.replaceAll(" ", ""));
+                } else {
+                    location = label;
+                }
                 mPhoneNumber.setVisibility(View.GONE);
             }
 
