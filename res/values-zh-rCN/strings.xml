@@ -563,7 +563,7 @@
     <string name="vibrate_outgoing">对方接听时震动</string>
     <string name="vibrate_call_waiting">呼叫等待时震动</string>
     <string name="vibrate_hangup">通话结束时震动</string>
-    <string name="vibrate_45">Vibrate every minute</string>
+    <string name="vibrate_45">每分钟震动</string>
     <string name="vibrate_45_sum">呼出通话到达每分钟的 45 秒时震动</string>
     <string name="rejected_as_missed">拒接来电显示为未接</string>
     <string name="rejected_as_missed_sum">将拒接来电在通话记录中显示为未接来电而不是已接来电</string>
@@ -605,6 +605,10 @@
     <string name="voice_quality_entry_clear">Clear</string>
     <string name="voice_quality_entry_crisp">Crisp</string>
     <string name="voice_quality_entry_bright">Bright</string>
+
+    <!-- Transparent in call widget -->
+    <string name="transparent_in_call_widget">通话屏幕透明</string>
+    <string name="transparent_in_call_widget_summary">显示来电联系人图片</string>
     <string-array name="clir_display_values">
         <item>网络默认设置</item>
         <item>隐藏号码</item>
