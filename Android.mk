@@ -7,7 +7,8 @@ include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := \
 	src/com/android/phone/CallLogAsync.java \
-	src/com/android/phone/HapticFeedback.java
+	src/com/android/phone/HapticFeedback.java \
+        src/com/android/phone/location/PhoneLocation.java
 
 LOCAL_MODULE := com.android.phone.common
 include $(BUILD_STATIC_JAVA_LIBRARY)
