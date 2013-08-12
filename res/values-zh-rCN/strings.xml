@@ -631,4 +631,34 @@
     <string name="dtmf_tone_enable_title" msgid="827601042915852989">"拨号键盘触摸音效"</string>
     <string name="dial_pad_autocomplete" msgid="494525952035761075">"拨号键盘自动补全"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"铃声和振动"</string>
+
+    <!-- Blacklist preferences -->
+    <string name="blacklist_title">黑名单</string>
+    <string name="blacklist_summary_disabled">禁用</string>
+    <string name="blacklist_summary">来自黑名单中号码的来电会被拒绝</string>
+
+    <!-- Blacklist notifications -->
+    <string name="blacklist_notification">拒绝了一个来自 %s 的电话</string>
+    <string name="blacklist_notification_private_number">拒绝了一个来自私人号码的电话</string>
+    <string name="blacklist_notification_list_private">秘密</string>
+    <string name="blacklist_notification_unknown_number">拒绝了未知号码 %s</string>
+    <string name="blacklist_notification_multiple"><xliff:g id="count">%d</xliff:g> 已拒绝</string>
+    <string name="unblock_number">解禁</string>
+
+    <!-- Blacklist management -->
+    <string name="add_blacklist_number">添加号码</string>
+    <string name="add_to_blacklist">加入黑名单</string>
+    <string name="add_to_blacklist_message">未来来自 %s 会被拒绝</string>
+    <string name="remove_blacklist_number_title">移除号码</string>
+    <string name="remove_blacklist_number">你想从黑名单移除号码 %s 吗?</string>
+
+    <!-- Text for the onscreen "Blacklist" button -->
+    <string name="onscreenBlacklistText">黑名单</string>
+
+    <!-- Mobile network settings screen, setting check box name -->
+    <string name="national_roaming">国内网络漫游</string>
+    <!-- Mobile network settings screen, setting summary text when check box is selected -->
+    <string name="national_roaming_enable">国内漫游时连接到互联网</string>
+    <!-- Mobile network settings screen, setting summary text when check box is clear -->
+    <string name="national_roaming_disable">国内漫游时连接到互联网</string>
 </resources>
