@@ -713,4 +713,8 @@
     <string name="noise_suppression_title">降噪</string>
     <string name="noise_suppression_summary">通话时启用降噪功能</string>
     <!-- End Noise suppression -->
+
+    <!-- Incoming call in background -->
+    <string name="bg_incall">后台来电</string>
+    <string name="bg_incall_summary">屏幕开启时，将来电界面保留在后台，只显示通知和播放铃声</string>
 </resources>
