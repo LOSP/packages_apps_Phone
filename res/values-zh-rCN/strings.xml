@@ -661,4 +661,51 @@
     <string name="national_roaming_enable">国内漫游时连接到互联网</string>
     <!-- Mobile network settings screen, setting summary text when check box is clear -->
     <string name="national_roaming_disable">国内漫游时连接到互联网</string>
+
+    <!-- Setting title for the flip action setting. -->
+    <string name="flip_action_title">翻转操作</string>
+
+    <!-- Dialog title of the flip action setting. -->
+    <string name="flip_action_dialog_title">翻转设备来\u2026</string>
+
+    <!-- Setting summary for the flip action setting. -->
+    <string name="flip_action_summary">翻转设备将 <xliff:g id="action">%s</xliff:g></string>
+
+    <!-- Values for the flip action settings. -->
+    <string-array name="flip_action_setting_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Entries listed in the setting for the flip action. -->
+    <string-array name="flip_action_setting_entries">
+        <item>无作用</item>
+        <item>减弱声音</item>
+        <item>忽略来电</item>
+    </string-array>
+
+    <!-- Summary texts for flip action. Must be ordered by numerical
+         value (do nothing = 0, mute = 1, dismiss = 2) -->
+    <string-array name="flip_action_summary_entries">
+        <item>无作用</item>
+        <item>减弱声音</item>
+        <item>忽略来电</item>
+    </string-array>
+
+    <!-- Advanced Settings -->
+    <string name="advanced_setting">高级设置</string>
+    <string name="vibrate_outgoing">接电话时震动</string>
+    <string name="vibrate_call_waiting">等待接通时震动</string>
+    <string name="vibrate_hangup">挂断时震动</string>
+    <string name="vibrate_45">每分钟震动</string>
+    <string name="vibrate_45_sum">打出电话时在每分钟的45秒时震动</string>
+    <string name="calllog_after_call">通话结束显示记录</string>
+    <string name="calllog_after_call_summary">当通话结束后显示通话记录</string>
+    <string name="rejected_as_missed">拒绝来电作为未接</string>
+    <string name="rejected_as_missed_sum">在通话记录中将拒绝来电标记为 \'未接\' 而不是 \'打入\'</string>
+
+    <!-- Transparent in call widget -->
+    <string name="transparent_in_call_widget">通话界面透明</string>
+    <string name="transparent_in_call_widget_summary">在打入电话界面显示完整的联系人图片</string>
 </resources>
