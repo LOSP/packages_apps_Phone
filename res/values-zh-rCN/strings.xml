@@ -708,4 +708,9 @@
     <!-- Transparent in call widget -->
     <string name="transparent_in_call_widget">通话界面透明</string>
     <string name="transparent_in_call_widget_summary">在打入电话界面显示完整的联系人图片</string>
+
+    <!-- Noise suppression -->
+    <string name="noise_suppression_title">降噪</string>
+    <string name="noise_suppression_summary">通话时启用降噪功能</string>
+    <!-- End Noise suppression -->
 </resources>
